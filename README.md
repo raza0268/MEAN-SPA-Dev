@@ -1,4 +1,4 @@
-# author
+# Author
 
 Syed Raza Mehdi
 Software Engineer
