@@ -1,3 +1,9 @@
+# author
+
+Syed Raza Mehdi
+Software Engineer
+Experience 3+ years in MEAN , MERN , LAMP , CodeIgniter , Web API's , Testing using Selenium.
+
 # MeanSpa
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20.
