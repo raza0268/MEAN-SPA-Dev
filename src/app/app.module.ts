@@ -4,22 +4,33 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
   MatInputModule,
   MatCardModule,
-  MatButtonModule
+  MatButtonModule,
+  MatToolbarModule,
+  MatExpansionModule
 } from "@angular/material";
 import { FormsModule } from "@angular/forms";
 
 import { AppComponent } from "./app.component";
 import { CreatePostComponent } from "./posts/create-post/create-post.component";
+import { PostListComponent } from "./posts/post-list/post-list.component";
+import { HeaderComponent } from "./header/header.component";
 
 @NgModule({
-  declarations: [AppComponent, CreatePostComponent],
+  declarations: [
+    AppComponent,
+    CreatePostComponent,
+    HeaderComponent,
+    PostListComponent
+  ],
   imports: [
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
     MatInputModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatToolbarModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
