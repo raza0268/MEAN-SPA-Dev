@@ -1,9 +1,19 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const Post = require("./models/post");
+const mongoose = require("mongoose");
+
+mongoose.connect("mongodb+srv://raza4075:jYeEXBy39Q2ZkbvX@cluster0-j3ito.mongodb.net/MERN_SPA?retryWrites=true&w=majority").then(() => {
+  console.log("connection successfull");
+}).catch(() => {
+  console.log("connection error");
+});
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -19,39 +29,38 @@ app.use((req, res, next) => {
 });
 
 app.post("/api/posts", (req, res, next) => {
-  const post = req.body;
-  console.log(post);
-  res.status(201).json({
-    message: "post added successfully"
+  const post = new Post({
+    title: req.body.title,
+    content: req.body.content
   });
+  post.save().then(result => {
+    res.status(201).json({
+      message: "post added successfully",
+      postId: result._id
+    });
+  });
+  // console.log(post);
+
 });
 
 app.get("/api/posts", (req, res, next) => {
-  const posts = [
-    {
-      id: "as12121asa",
-      title: "First",
-      content: "hello"
-    },
-    {
-      id: "asas53423",
-      title: "second",
-      content: "hello"
-    },
-    {
-      id: "123ds45",
-      title: "third",
-      content: "hello"
-    },
-    {
-      id: "87jh65",
-      title: "fourth",
-      content: "hello"
-    }
-  ];
-  res.status(200).json({
-    message: "Data send successfully",
-    posts: posts
+  Post.find().then(documents => {
+    res.status(200).json({
+      message: "Data send successfully",
+      posts: documents
+    });
+  });
+});
+
+app.delete("/api/posts/:id", (req, res, next) => {
+  Post.deleteOne({
+    _id: req.params.id
+  }).then(result => {
+    console.log(result);
+    res.status(200).json({
+      message: "post deleted successfully"
+    });
+
   });
 });
 
